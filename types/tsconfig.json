@@ -12,7 +12,7 @@
         "forceConsistentCasingInFileNames": true,
         "baseUrl": ".",
         "paths": {
-            "@tiled/types": [
+            "tiled-types": [
                 "."
             ]
         }

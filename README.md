@@ -1,4 +1,4 @@
-# @tiled/types
+# tiled-types
 
 Type definitions of Tiled generated JSON https://github.com/bjorn/tiled.
 
@@ -11,13 +11,13 @@ Based on its documentation https://doc.mapeditor.org/en/stable/reference/json-ma
 ## Installation
 
 ```
-npm install @tiled/types
+npm install tiled-types
 ```
 
 ## Use
 
 ```typescript
-import TiledMap, { TiledLayerTilelayer } from "@tiled/types";
+import TiledMap, { TiledLayerTilelayer } from "tiled-types";
 
 // Assume we're in node context
 const map: TiledMap = fs.readFileSync('path/to/schema.json', 'utf8');
