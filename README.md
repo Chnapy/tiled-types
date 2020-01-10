@@ -22,7 +22,7 @@ import TiledMap, { TiledLayerTilelayer } from "@tiled/types";
 // Assume we're in node context
 const map: TiledMap = fs.readFileSync('path/to/schema.json', 'utf8');
 
-const allTilelayers: TiledLayerTilelayer[] = sampleOrthogonal.layers
+const allTilelayers: TiledLayerTilelayer[] = map.layers
     .filter((l): l is TiledLayerTilelayer => l.type === 'tilelayer');
 ```
 You can find quite the same example [here](types/tiled-tests.ts)
