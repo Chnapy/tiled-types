@@ -1,9 +1,9 @@
 // TypeScript Version: 3.7
 
-// Definitions for tiled 1.3.1
+// Definitions for Tiled 1.3.1
 // Project: https://github.com/bjorn/tiled#readme
 //
-// Types made with help of tiled documentation
+// Types made with help of Tiled documentation
 // https://doc.mapeditor.org/en/stable/reference/json-map-format
 
 // --TILESET--
