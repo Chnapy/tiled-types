@@ -120,7 +120,7 @@ export interface TiledObject<T extends TiledMapType> {
 export type TiledLayerType = 'tilelayer' | 'objectgroup' | 'imagelayer' | 'group';
 
 export interface TiledLayerAbstract<T extends TiledLayerType> {
-    id: number;
+    id?: number;
     name: string;
     type: T;
     x: number;
@@ -138,7 +138,7 @@ export interface TiledLayerTilelayer extends TiledLayerAbstract<'tilelayer'> {
     type: 'tilelayer';
     chunks?: TiledChunk[];
     compression?: 'zlib' | 'gzip' | '';
-    data?: number[];    // | string ?
+    data: number[];
     encoding?: 'csv' | 'base64';
     transparentcolor?: string;
 }
@@ -154,27 +154,32 @@ export interface TiledLayerImagelayer extends TiledLayerAbstract<'imagelayer'> {
     image: string;
 }
 
+export interface TiledLayerGroup extends TiledLayerAbstract<'group'> {
+    type: 'group';
+    layers: Array<TiledLayer<TiledMapType>>;
+}
+
 /**
  * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#layer
  */
-export type TiledLayer<O extends TiledMapType> = TiledLayerTilelayer | TiledLayerObjectgroup<O> | TiledLayerImagelayer;
+export type TiledLayer<O extends TiledMapType> = TiledLayerTilelayer | TiledLayerObjectgroup<O> | TiledLayerImagelayer | TiledLayerGroup;
 
 // --MAP--
 
 export type TiledMapType = 'orthogonal' | 'isometric' | 'staggered' | 'hexagonal';
 
 export interface TiledMapAbstract<O extends TiledMapType> {
-    type: 'map';
+    type?: 'map';
     version: number;
-    tiledversion: string;
+    tiledversion?: string;
     width: number;
     height: number;
     tileheight: number;
     tilewidth: number;
-    infinite: boolean;
+    infinite?: boolean;
     orientation: O;
     backgroundcolor?: string;
-    nextlayerid: number;
+    nextlayerid?: number;
     nextobjectid: number;
     properties?: TiledProperty[];
     layers: Array<TiledLayer<any>>;

@@ -1,6 +1,6 @@
 {
   "name": "tiled-types",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Type definitions of Tiled generated JSON",
   "main": "types/index.d.ts",
   "types": "types",
@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/Chnapy/tiled-types#readme",
   "devDependencies": {
-    "dtslint": "2.0.5",
+    "dtslint": "3.6.2",
     "typescript": "3.7.4"
   },
   "scripts": {
