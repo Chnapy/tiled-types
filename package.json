@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/Chnapy/tiled-types#readme",
   "devDependencies": {
-    "dtslint": "2.0.5",
+    "dtslint": "3.6.2",
     "typescript": "3.7.4"
   },
   "scripts": {
