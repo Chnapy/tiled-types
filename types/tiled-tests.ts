@@ -4,6 +4,7 @@ import TiledMap, { TiledLayerTilelayer } from "tiled-types";
 const sampleOrthogonal: TiledMap = {
     height: 20,
     infinite: false,
+    compressionlevel: -1,
     layers: [
         {
             data: [93, 93, 93, 93, 93, 93, 93],
@@ -18,7 +19,7 @@ const sampleOrthogonal: TiledMap = {
             y: 0
         },
         {
-            data: [19, 19, 19, 19, 19],
+            data: 'foo-bar',
             height: 20,
             id: 2,
             name: "obstacles",
