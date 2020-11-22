@@ -6,6 +6,41 @@
 // Types made with help of Tiled documentation
 // https://doc.mapeditor.org/en/stable/reference/json-map-format
 
+// --WANG--
+
+/**
+ * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#wang-color
+ */
+export interface TiledWangColor {
+    color: string;
+    name: string;
+    probability: number;
+    tile: number;
+}
+
+/**
+ * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#wang-tile
+ */
+export interface TiledWangTile {
+    dflip: boolean;
+    hflip: boolean;
+    tileid: number;
+    vflip: boolean;
+    wangid: number[];
+}
+
+/**
+ * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#wang-set
+ */
+export interface TiledWangSet {
+    cornercolors: TiledWangColor[];
+    edgecolors: TiledWangColor[];
+    name: string;
+    properties: TiledProperty[];
+    tile: number;
+    wangtiles: TiledWangTile[];
+}
+
 // --TILESET--
 
 /**
@@ -20,6 +55,7 @@ export interface Point {
  * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#tileset
  */
 export interface TiledTileset {
+    backgroundcolor?: string;
     columns: number;
     firstgid: number;
     grid?: TiledGrid;
@@ -28,17 +64,20 @@ export interface TiledTileset {
     imageheight?: number;
     margin: number;
     name: string;
+    objectalignment?: 'unspecified' | 'topleft' | 'top' | 'topright' | 'left' | 'center' | 'right' | 'bottomleft' | 'bottom' | 'bottomright';
     properties?: TiledProperty[];
+    source?: string;
     spacing: number;
     terrains?: TiledTerrain[];
     tilecount: number;
+    tiledversion?: string;
     tileheight: number;
     tileoffset?: { x: number; y: number; };
     tiles?: TiledTile[];
     tilewidth: number;
     transparentcolor?: string;
     type?: 'tileset';
-    wangsets?: any; // TODO
+    wangsets?: TiledWangSet[];
 }
 
 /**
@@ -54,12 +93,13 @@ export interface TiledGrid {
  * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#tile-definition
  */
 export interface TiledTile {
-    animation?: TiledFrame[]; // TODO
+    animation?: TiledFrame[];
     id: number;
     image?: string;
     imageheight?: number;
     imagewidth?: number;
     objectgroup?: TiledLayerObjectgroup<any>;
+    probability?: number;
     properties?: TiledProperty[];
     terrain?: number[];
     type?: string;
@@ -78,6 +118,7 @@ export interface TiledFrame {
  */
 export interface TiledTerrain {
     name: string;
+    properties?: TiledProperty[];
     tile: number;
 }
 
@@ -95,6 +136,24 @@ export interface TiledChunk {
 }
 
 /**
+ * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#text
+ */
+export interface TiledText {
+    bold?: boolean;
+    color?: string;
+    fontfamily?: string;
+    halign?: 'center' | 'right' | 'justify' | 'left';
+    italic?: boolean;
+    kerning?: boolean;
+    pixelsize?: number;
+    strikeout?: boolean;
+    text: string;
+    underline?: boolean;
+    valign?: string;
+    wrap?: boolean;
+}
+
+/**
  * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#object
  */
 export interface TiledObject<T extends TiledMapType> {
@@ -109,7 +168,7 @@ export interface TiledObject<T extends TiledMapType> {
     properties: TiledProperty[];
     rotation: number;
     template?: string;
-    text?: { text: string; wrap: boolean; };
+    text?: TiledText;
     type: string;
     visible: boolean;
     width: number;
@@ -129,6 +188,9 @@ export interface TiledLayerAbstract<T extends TiledLayerType> {
     height: number;
     offsetx?: number;
     offsety?: number;
+    startx?: number;
+    starty?: number;
+    tintcolor?: string;
     opacity: number;
     properties?: TiledProperty[];
     visible: boolean;
@@ -137,10 +199,9 @@ export interface TiledLayerAbstract<T extends TiledLayerType> {
 export interface TiledLayerTilelayer extends TiledLayerAbstract<'tilelayer'> {
     type: 'tilelayer';
     chunks?: TiledChunk[];
-    compression?: 'zlib' | 'gzip' | '';
-    data: number[];
+    compression?: 'zlib' | 'gzip' | 'zstd' | '';
+    data: number[] | string;
     encoding?: 'csv' | 'base64';
-    transparentcolor?: string;
 }
 
 export interface TiledLayerObjectgroup<O extends TiledMapType> extends TiledLayerAbstract<'objectgroup'> {
@@ -152,6 +213,7 @@ export interface TiledLayerObjectgroup<O extends TiledMapType> extends TiledLaye
 export interface TiledLayerImagelayer extends TiledLayerAbstract<'imagelayer'> {
     type: 'imagelayer';
     image: string;
+    transparentcolor?: string;
 }
 
 export interface TiledLayerGroup extends TiledLayerAbstract<'group'> {
@@ -184,6 +246,7 @@ export interface TiledMapAbstract<O extends TiledMapType> {
     properties?: TiledProperty[];
     layers: Array<TiledLayer<any>>;
     tilesets: TiledTileset[];
+    compressionlevel?: number;
 }
 
 export interface TiledMapIsometric extends TiledMapAbstract<'isometric'> {

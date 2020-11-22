@@ -4,7 +4,7 @@ Type definitions of Tiled generated JSON https://github.com/bjorn/tiled.
 
 [![Build Status](https://travis-ci.com/Chnapy/tiled-types.svg?branch=master)](https://travis-ci.com/Chnapy/tiled-types)
 
-Made for Tiled 1.3.1.
+Made for Tiled 1.4.
 
 Based on its documentation https://doc.mapeditor.org/en/stable/reference/json-map-format.
 
