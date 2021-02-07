@@ -1,6 +1,6 @@
 // TypeScript Version: 3.7
 
-// Definitions for Tiled 1.3.1
+// Definitions for Tiled 1.4
 // Project: https://github.com/bjorn/tiled#readme
 //
 // Types made with help of Tiled documentation
