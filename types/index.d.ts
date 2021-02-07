@@ -1,6 +1,6 @@
 // TypeScript Version: 3.7
 
-// Definitions for Tiled 1.3.1
+// Definitions for Tiled 1.4
 // Project: https://github.com/bjorn/tiled#readme
 //
 // Types made with help of Tiled documentation
@@ -98,7 +98,7 @@ export interface TiledTile {
     image?: string;
     imageheight?: number;
     imagewidth?: number;
-    objectgroup?: TiledLayerObjectgroup<any>;
+    objectgroup?: TiledLayerObjectgroup;
     probability?: number;
     properties?: TiledProperty[];
     terrain?: number[];
@@ -156,9 +156,9 @@ export interface TiledText {
 /**
  * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#object
  */
-export interface TiledObject<T extends TiledMapType> {
+export interface TiledObject {
     ellipse?: boolean;
-    gid: T extends 'tilelayer' ? number : never;
+    gid?: number;
     height: number;
     id: number;
     name: string;
@@ -204,10 +204,10 @@ export interface TiledLayerTilelayer extends TiledLayerAbstract<'tilelayer'> {
     encoding?: 'csv' | 'base64';
 }
 
-export interface TiledLayerObjectgroup<O extends TiledMapType> extends TiledLayerAbstract<'objectgroup'> {
+export interface TiledLayerObjectgroup extends TiledLayerAbstract<'objectgroup'> {
     type: 'objectgroup';
     draworder: 'topdown' | 'index';
-    objects: Array<TiledObject<O>>;
+    objects: TiledObject[];
 }
 
 export interface TiledLayerImagelayer extends TiledLayerAbstract<'imagelayer'> {
@@ -218,13 +218,13 @@ export interface TiledLayerImagelayer extends TiledLayerAbstract<'imagelayer'> {
 
 export interface TiledLayerGroup extends TiledLayerAbstract<'group'> {
     type: 'group';
-    layers: Array<TiledLayer<TiledMapType>>;
+    layers: TiledLayer[];
 }
 
 /**
  * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#layer
  */
-export type TiledLayer<O extends TiledMapType> = TiledLayerTilelayer | TiledLayerObjectgroup<O> | TiledLayerImagelayer | TiledLayerGroup;
+export type TiledLayer = TiledLayerTilelayer | TiledLayerObjectgroup | TiledLayerImagelayer | TiledLayerGroup;
 
 // --MAP--
 
@@ -244,7 +244,7 @@ export interface TiledMapAbstract<O extends TiledMapType> {
     nextlayerid?: number;
     nextobjectid: number;
     properties?: TiledProperty[];
-    layers: Array<TiledLayer<any>>;
+    layers: TiledLayer[];
     tilesets: TiledTileset[];
     compressionlevel?: number;
 }
@@ -284,9 +284,9 @@ export type TiledMap = TiledMapOrthogonal
 
 // --PROPERTY--
 
-export type TiledPropertyValue = string | number;
+export type TiledPropertyValue = string | number | boolean;
 
-export type TiledPropertyType = 'string' | 'int';
+export type TiledPropertyType = 'string' | 'int' | 'float' | 'bool' | 'color' | 'file' | 'object';
 
 /**
  * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#property
@@ -298,9 +298,10 @@ export interface TiledPropertyAbstract<V extends TiledPropertyValue, T extends T
 }
 
 export type TiledProperty =
-    TiledPropertyAbstract<string, 'string'>
-    | TiledPropertyAbstract<number, 'int'>;
+    TiledPropertyAbstract<string, 'string' | 'color' | 'file'>
+    | TiledPropertyAbstract<number, 'int' | 'float' | 'object'>
+    | TiledPropertyAbstract<boolean, 'bool'>;
 
-export {};
+export { };
 
 export default TiledMap;
