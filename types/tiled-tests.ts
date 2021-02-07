@@ -69,39 +69,39 @@ const sampleOrthogonal: TiledMap = {
     width: 20,
     properties: [
         {
-            "name": "azerty",
-            "type": "color",
-            "value": "#ffff5500"
+            name: "azerty",
+            type: "color",
+            value: "#ffff5500"
         },
         {
-            "name": "foo",
-            "type": "string",
-            "value": "bar"
+            name: "foo",
+            type: "string",
+            value: "bar"
         },
         {
-            "name": "tata",
-            "type": "float",
-            "value": 8.89
+            name: "tata",
+            type: "float",
+            value: 8.89
         },
         {
-            "name": "titi",
-            "type": "file",
-            "value": "Links.txt"
+            name: "titi",
+            type: "file",
+            value: "Links.txt"
         },
         {
-            "name": "toto",
-            "type": "bool",
-            "value": true
+            name: "toto",
+            type: "bool",
+            value: true
         },
         {
-            "name": "tutu",
-            "type": "int",
-            "value": 8
+            name: "tutu",
+            type: "int",
+            value: 8
         },
         {
-            "name": "tyty",
-            "type": "object",
-            "value": 7
+            name: "tyty",
+            type: "object",
+            value: 7
         }
     ]
 };
