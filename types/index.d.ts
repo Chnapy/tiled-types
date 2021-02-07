@@ -98,7 +98,7 @@ export interface TiledTile {
     image?: string;
     imageheight?: number;
     imagewidth?: number;
-    objectgroup?: TiledLayerObjectgroup<any>;
+    objectgroup?: TiledLayerObjectgroup;
     probability?: number;
     properties?: TiledProperty[];
     terrain?: number[];
@@ -156,9 +156,9 @@ export interface TiledText {
 /**
  * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#object
  */
-export interface TiledObject<T extends TiledMapType> {
+export interface TiledObject {
     ellipse?: boolean;
-    gid: T extends 'tilelayer' ? number : never;
+    gid?: number;
     height: number;
     id: number;
     name: string;
@@ -204,10 +204,10 @@ export interface TiledLayerTilelayer extends TiledLayerAbstract<'tilelayer'> {
     encoding?: 'csv' | 'base64';
 }
 
-export interface TiledLayerObjectgroup<O extends TiledMapType> extends TiledLayerAbstract<'objectgroup'> {
+export interface TiledLayerObjectgroup extends TiledLayerAbstract<'objectgroup'> {
     type: 'objectgroup';
     draworder: 'topdown' | 'index';
-    objects: Array<TiledObject<O>>;
+    objects: TiledObject[];
 }
 
 export interface TiledLayerImagelayer extends TiledLayerAbstract<'imagelayer'> {
@@ -218,13 +218,13 @@ export interface TiledLayerImagelayer extends TiledLayerAbstract<'imagelayer'> {
 
 export interface TiledLayerGroup extends TiledLayerAbstract<'group'> {
     type: 'group';
-    layers: Array<TiledLayer<TiledMapType>>;
+    layers: TiledLayer[];
 }
 
 /**
  * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#layer
  */
-export type TiledLayer<O extends TiledMapType> = TiledLayerTilelayer | TiledLayerObjectgroup<O> | TiledLayerImagelayer | TiledLayerGroup;
+export type TiledLayer = TiledLayerTilelayer | TiledLayerObjectgroup | TiledLayerImagelayer | TiledLayerGroup;
 
 // --MAP--
 
@@ -244,7 +244,7 @@ export interface TiledMapAbstract<O extends TiledMapType> {
     nextlayerid?: number;
     nextobjectid: number;
     properties?: TiledProperty[];
-    layers: Array<TiledLayer<any>>;
+    layers: TiledLayer[];
     tilesets: TiledTileset[];
     compressionlevel?: number;
 }
