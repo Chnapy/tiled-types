@@ -284,9 +284,9 @@ export type TiledMap = TiledMapOrthogonal
 
 // --PROPERTY--
 
-export type TiledPropertyValue = string | number;
+export type TiledPropertyValue = string | number | boolean;
 
-export type TiledPropertyType = 'string' | 'int';
+export type TiledPropertyType = 'string' | 'int' | 'float' | 'bool' | 'color' | 'file' | 'object';
 
 /**
  * @see https://doc.mapeditor.org/en/stable/reference/json-map-format/#property
@@ -298,9 +298,10 @@ export interface TiledPropertyAbstract<V extends TiledPropertyValue, T extends T
 }
 
 export type TiledProperty =
-    TiledPropertyAbstract<string, 'string'>
-    | TiledPropertyAbstract<number, 'int'>;
+    TiledPropertyAbstract<string, 'string' | 'color' | 'file'>
+    | TiledPropertyAbstract<number, 'int' | 'float' | 'object'>
+    | TiledPropertyAbstract<boolean, 'bool'>;
 
-export {};
+export { };
 
 export default TiledMap;
