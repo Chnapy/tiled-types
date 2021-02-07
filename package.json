@@ -1,6 +1,6 @@
 {
   "name": "tiled-types",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Type definitions of Tiled generated JSON",
   "main": "types/index.d.ts",
   "types": "types",
